@@ -62,7 +62,7 @@ namespace game {
 	}
 
 	void Map::createNullRoom() {
-		std::unique_ptr<Room> room = std::make_unique<Room>();
+		std::unique_ptr<Room> room = std::make_unique<Room>("null");
 		int roomId = room->getId();
 		this->idMap[roomId] = std::move(room);
 		this->nullRoomId = roomId;
@@ -163,6 +163,16 @@ namespace game {
 			}
 		}
 		return rooms;
+	}
+
+	void Map::buildCorridor(Directions direction, int distance, Room& from) {
+		int newRoomId = this->addRoom();
+		Room& newRoom = this->getRoom(newRoomId);
+		from.setExit(newRoom, direction);
+		if (distance > 0) {
+			this->buildCorridor(direction, --distance, newRoom);
+		}
+		return;
 	}
 
 	Directions Map::getOppositeDirection(Directions direction) {

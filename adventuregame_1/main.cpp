@@ -24,10 +24,10 @@ int main()
 	//Room& room8 = gameMap.getRoom(gameMap.addRoom("room8"));
 	//Room& room9 = gameMap.getRoom(gameMap.addRoom("room9"));
 
-	for (int i = 0; i <= 20; i++) {
-		gameMap.addRoom(std::format("room{}", i));
-	}
-
+	Room& startRoom = gameMap.getRoom(gameMap.addRoom());
+	// TODO buildCorridor should return either the last room id
+	// or all the corridor rooms' ids
+	gameMap.buildCorridor(Directions::north, 5, startRoom);
 	std::vector<Room*> rooms = gameMap.getRooms();
 
 

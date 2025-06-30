@@ -24,6 +24,8 @@ namespace game {
 		int addRoom();
 		int addRoom(const std::string& name);
 		int addRoom(Room& room);
+		void buildCorridor(Directions direction, int distance, Room& from);
+		void buildCorridor(Directions direction, int distance, int from);
 		void setStart(Room& room);
 		Room& getRoom(int id);
 		int getEdge(Directions direction);
